@@ -20,15 +20,15 @@ namespace MushyAndCoffe.Managers
         /// </summary>
         /// <param name="check">The type of message that is to be logged.</param>
         /// <param name="message">The message to be logged.</param>
-        public static void StaticDebug(string check, string message)
+        public static void StaticDebug(MessageTypes check, string message)
         {
             Instance.DebugMessage(check, message);
         }
 
-        private void DebugMessage(string check, string message)
+        private void DebugMessage(MessageTypes check, string message)
         {
-            if (!checks.ContainsKey(check)) return;
-            if (!checks[check]) return;
+            if (!checks.ContainsKey(check.ToString())) return;
+            if (!checks[check.ToString()]) return;
             Debug.Log(message);
         }
     }
