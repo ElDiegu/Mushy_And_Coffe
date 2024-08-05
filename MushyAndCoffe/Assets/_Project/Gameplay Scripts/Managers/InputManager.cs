@@ -4,13 +4,14 @@ using UnityEngine.Rendering;
 
 namespace MushyAndCoffe.Managers
 {
-    public class InputManager : MonoBehaviour
+	public class InputManager : PersistentSingleton<InputManager>
     {
         [SerializeField] private PlayerInput playerInput;
         public InputStruct InputStruct { get; private set; }
         
-        private void Awake()
+		protected override void Awake()
         {
+			base.Awake();
             if (!playerInput) playerInput = GetComponent<PlayerInput>();
             InputStruct = new InputStruct(playerInput);
         }
@@ -25,6 +26,11 @@ namespace MushyAndCoffe.Managers
         {
             InputStruct = new InputStruct(playerInput);
         }
+		
+		public InputStruct GetInput() 
+		{
+			return InputStruct;
+		}
     }
     
     public struct InputStruct
