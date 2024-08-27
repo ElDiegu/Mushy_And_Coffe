@@ -39,6 +39,7 @@ namespace MushyAndCoffe.Managers
         public Vector2 Movement { get; set; }
         public bool Interact { get; set; }
         public bool Dash { get; set; }
+		public bool LeftClick { get; set; }
         
         public InputStruct(PlayerInput playerInput) 
         {
@@ -46,6 +47,7 @@ namespace MushyAndCoffe.Managers
             Movement = PlayerInput.actions["Movement"].ReadValue<Vector2>();
             Interact = PlayerInput.actions["Interaction"].triggered;
             Dash = PlayerInput.actions["Dash"].triggered;
+			LeftClick = PlayerInput.actions["LeftClick"].triggered;
         }
         
         public override string ToString() 
