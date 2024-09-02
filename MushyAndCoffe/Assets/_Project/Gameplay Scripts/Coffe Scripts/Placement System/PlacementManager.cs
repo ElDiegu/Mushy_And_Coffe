@@ -1,5 +1,7 @@
+using MushyAndCoffe.Events;
 using MushyAndCoffe.Extensions;
 using MushyAndCoffe.Managers;
+using MushyAndCoffe.Systems.EventSystem;
 using UnityEngine;
 
 namespace MushyAndCoffe.PlacementSystem
@@ -13,6 +15,14 @@ namespace MushyAndCoffe.PlacementSystem
 		[SerializeField] private GameObject previewObject = null;
 		private Physics physics;
 		private Quaternion objectRotation = new Quaternion();
+		
+		EventBinding<SelectFurnitureEvent> selectFurnitureEvent;
+		
+		private void OnEnable()
+		{
+			selectFurnitureEvent = new EventBinding<SelectFurnitureEvent>(ChangeSelectedObject);
+			EventBus<SelectFurnitureEvent>.Register(selectFurnitureEvent);
+		}
 
 		private void Update()
 		{
@@ -61,6 +71,10 @@ namespace MushyAndCoffe.PlacementSystem
 			previewObject.transform.position = grid.GetCellCenterWorld(cell);
 			previewObject.transform.rotation = objectRotation;
 		}
+		
+		private void ChangeSelectedObject(SelectFurnitureEvent selectFurnitureEvent) 
+		{
+			selectedObject = selectFurnitureEvent.selectedFurniture;
 		}
 		
 #if UNITY_EDITOR
