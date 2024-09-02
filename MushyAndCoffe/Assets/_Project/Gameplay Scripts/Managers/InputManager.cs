@@ -40,6 +40,7 @@ namespace MushyAndCoffe.Managers
         public bool Interact { get; set; }
         public bool Dash { get; set; }
 		public bool LeftClick { get; set; }
+		public bool RotateObject { get; set; }
         
         public InputStruct(PlayerInput playerInput) 
         {
@@ -48,6 +49,7 @@ namespace MushyAndCoffe.Managers
             Interact = PlayerInput.actions["Interaction"].triggered;
             Dash = PlayerInput.actions["Dash"].triggered;
 			LeftClick = PlayerInput.actions["LeftClick"].triggered;
+			RotateObject = PlayerInput.actions["RotateObject"].triggered;
         }
         
         public override string ToString() 
