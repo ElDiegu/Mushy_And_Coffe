@@ -19,7 +19,7 @@ namespace MushyAndCoffe.Managers
         private void Update()
         {
             GatherInput();
-            DebugManager.StaticDebug(MessageTypes.Input, InputStruct.ToString());
+            DebugManager.Log(MessageTypes.Input, InputStruct.ToString());
         }
         
         private void GatherInput() 
