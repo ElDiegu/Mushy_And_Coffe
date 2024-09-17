@@ -12,7 +12,7 @@ namespace MushyAndCoffe.Player
         public float turnSpeed = 360f;
   
         [Header("Interaction Parameters")]      
-        public float interactionDistances = 1f;
+        public float interactionDistance = 1f;
         public float interactionRadius = 1f;
         public LayerMask interactionLayerMask;
 
