@@ -8,11 +8,12 @@ namespace MushyAndCoffe.PlacementSystem
 {
 	public class PlacementManager : Singleton<PlacementManager>
 	{
-		[SerializeField] private GameObject selectedObject;
+		[SerializeField] private GameObject selectedObject, cellSelected;
 		[SerializeField] private Grid grid;
 		[SerializeField] private LayerMask placementLayerMask;
 		[SerializeField] private Camera usedCamera;
 		[SerializeField] private GameObject previewObject = null;
+		[SerializeField] private GameObject cellSelector = null;
 		private Physics physics;
 		private Quaternion objectRotation = new Quaternion();
 		
@@ -61,15 +62,20 @@ namespace MushyAndCoffe.PlacementSystem
 			if (!hit || selectedObject == null) 
 			{
 				if (previewObject != null) Destroy(previewObject);
+				if (cellSelector != null) Destroy(cellSelector);
 				return;	
 			}
 			
 			if (previewObject == null) previewObject = Instantiate(selectedObject, clickLocation, new Quaternion());
-			
+
+			if (cellSelector == null) cellSelector = Instantiate(cellSelected, clickLocation, new Quaternion());
+
 			var cell = grid.WorldToCell(clickLocation);
 			
 			previewObject.transform.position = grid.GetCellCenterWorld(cell);
 			previewObject.transform.rotation = objectRotation;
+
+			cellSelector.transform.position = grid.GetCellCenterWorld(cell);
 		}
 		
 		private void ChangeSelectedObject(SelectFurnitureEvent selectFurnitureEvent) 
