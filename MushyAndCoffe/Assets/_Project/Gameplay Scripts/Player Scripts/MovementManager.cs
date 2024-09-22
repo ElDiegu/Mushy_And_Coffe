@@ -12,7 +12,7 @@ namespace MushyAndCoffe.Player
         [SerializeField] private Transform orientation;
 
         [Header("Movemen Manager Variables")]
-        [SerializeField] private Vector3 playerSpeed;
+        [field: SerializeField] public Vector3 playerSpeed { get; private set; }
         float currentSpeed;
 
         private void Awake()
