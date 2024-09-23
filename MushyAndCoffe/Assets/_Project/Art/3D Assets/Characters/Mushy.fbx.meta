@@ -3,7 +3,22 @@ guid: e4a7905838656104eb46c775500392d7
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material_dec
+    second: {fileID: 2100000, guid: 00cb8e3276e7b4a43821ce3e711c5f9c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material_mushyBody2
+    second: {fileID: 2100000, guid: 94903a77c95f21e4ab21887a292082a4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material_mushyHead
+    second: {fileID: 2100000, guid: 01d290e2317e7f1449edee53ccaf2345, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
