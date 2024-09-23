@@ -1,55 +1,71 @@
 using System.Collections.Generic;
 using MushyAndCoffe.Interfaces;
+using MushyAndCoffe.Items;
+using MushyAndCoffe.Managers;
+using MushyAndCoffe.Player;
 using MushyAndCoffe.ScriptableObjects;
 using UnityEditor;
 using UnityEngine;
 
 namespace MushyAndCoffe.CraftingSystem
 {
-	public abstract class Machine : MonoBehaviour, IInteractable
-	{
-		public MachineSO MachineSO;
-		public List<IngredientSO> IngredientsStored;
-		
-		public bool StoreIngredient(IngredientSO ingredient) 
-		{
-			if (IngredientsStored.Contains(ingredient)) return false;
-			
-			IngredientsStored.Add(ingredient);
-			return true;
-		}
-		
-		public bool RemoveIngredient(IngredientSO ingredient) 
-		{
-			return IngredientsStored.Remove(ingredient);
-		}
-		
-		public void RemoveAllIngredients() 
-		{
-			IngredientsStored.Clear(); 
-		}
-		
-		public void Interact() 
-		{
-			CraftingManager.Instance.CraftRecipe(this);
-		}
-	}
+    public class Machine : MonoBehaviour, IInteractable, ISOContainer
+    {
+        [SerializeField]
+        private MachineSO machineSO;
+        public ScriptableObject InteractableType { get {return machineSO;} set {} }
+        public List<IngredientSO> IngredientsStored;
+        
+        public void Interact(GameObject playerObject) 
+        {
+            var playerInventory = playerObject.GetComponent<InventoryManager>();
+            
+            if (machineSO.AllowedIngredients.Contains(playerInventory.item.GetComponent<ISOContainer>().InteractableType)) StoreIngredient(playerInventory.item);
+            else DebugManager.Log(MessageTypes.Crafting, "Invalid");
+        }
+
+        public bool StoreIngredient(GameObject ingredientObject) 
+        {
+            var ingredientSO = (IngredientSO) ingredientObject.GetComponent<ISOContainer>().InteractableType;
+            
+            if (IngredientsStored.Contains(ingredientSO)) return false;
+            
+            IngredientsStored.Add(ingredientSO);
+            Destroy(ingredientObject);
+            
+            return true;
+        }
+        
+        public bool RemoveIngredient(IngredientSO ingredient) 
+        {
+            return IngredientsStored.Remove(ingredient);
+        }
+        
+        public void RemoveAllIngredients() 
+        {
+            IngredientsStored.Clear(); 
+        }
+        
+        
+    }
 
 #if UNITY_EDITOR
-	[CustomEditor(typeof(Machine), true)]
-	public class MachineEditor : Editor 
-	{
-		public override void OnInspectorGUI()
-		{
-			base.OnInspectorGUI();
-			
-			var machine = (Machine)target;
-			
-			if (GUILayout.Button("Craft")) 
-			{
-				machine.Interact();
-			}
-		}	
-	}
+    [CustomEditor(typeof(Machine), true)]
+    public class MachineEditor : Editor 
+    {
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+            
+            /*         
+            var machine = (Machine)target;
+            
+            if (GUILayout.Button("Craft")) 
+            {
+                machine.Interact(null);
+            }
+            */
+        }	
+    }
 #endif
 }
