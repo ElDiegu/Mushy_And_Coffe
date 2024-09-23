@@ -54,7 +54,7 @@ MonoBehaviour:
   rb: {fileID: 3625681802902342920}
   inputManager: {fileID: 0}
   orientation: {fileID: 6168046909636687198}
-  playerSpeed: {x: 0, y: 0, z: 0}
+  <playerSpeed>k__BackingField: {x: 0, y: 0, z: 0}
 --- !u!114 &3656622400804411254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,7 +174,7 @@ Transform:
   m_GameObject: {fileID: 7800267804265616423}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

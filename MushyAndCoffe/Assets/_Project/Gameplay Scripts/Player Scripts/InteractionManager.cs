@@ -36,7 +36,7 @@ namespace MushyAndCoffe.Player
 			
 			if (input.Interact) 
 			{
-				selectedInteractable.Interact();
+				selectedInteractable.Interact(this.gameObject);
 			}
 		}
 
