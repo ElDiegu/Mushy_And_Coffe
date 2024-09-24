@@ -21,7 +21,7 @@ namespace MushyAndCoffe.Player
             if (!rb) rb = GetComponent<Rigidbody>();
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             ComputeMovement();
             Rotate();

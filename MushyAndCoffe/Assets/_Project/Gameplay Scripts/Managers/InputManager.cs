@@ -4,14 +4,14 @@ using UnityEngine.Rendering;
 
 namespace MushyAndCoffe.Managers
 {
-	public class InputManager : PersistentSingleton<InputManager>
+    public class InputManager : PersistentSingleton<InputManager>
     {
         [SerializeField] private PlayerInput playerInput;
         public InputStruct InputStruct { get; private set; }
         
-		protected override void Awake()
+        protected override void Awake()
         {
-			base.Awake();
+            base.Awake();
             if (!playerInput) playerInput = GetComponent<PlayerInput>();
             InputStruct = new InputStruct(playerInput);
         }
@@ -26,21 +26,22 @@ namespace MushyAndCoffe.Managers
         {
             InputStruct = new InputStruct(playerInput);
         }
-		
-		public InputStruct GetInput() 
-		{
-			return InputStruct;
-		}
+        
+        public InputStruct GetInput() 
+        {
+            return InputStruct;
+        }
     }
     
     public struct InputStruct
     {
-        public PlayerInput PlayerInput { get; set; }
-        public Vector2 Movement { get; set; }
-        public bool Interact { get; set; }
-        public bool Dash { get; set; }
-		public bool LeftClick { get; set; }
-		public bool RotateObject { get; set; }
+        public PlayerInput PlayerInput { get; private set; }
+        public Vector2 Movement { get; private set; }
+        public bool Interact { get; private set; }
+        public bool Dash { get; private set; }
+        public bool LeftClick { get; private set; }
+        public bool RotateObject { get; private set; }
+        public bool OpenInterface { get; private set; }
         
         public InputStruct(PlayerInput playerInput) 
         {
@@ -48,8 +49,9 @@ namespace MushyAndCoffe.Managers
             Movement = PlayerInput.actions["Movement"].ReadValue<Vector2>();
             Interact = PlayerInput.actions["Interaction"].triggered;
             Dash = PlayerInput.actions["Dash"].triggered;
-			LeftClick = PlayerInput.actions["LeftClick"].triggered;
-			RotateObject = PlayerInput.actions["RotateObject"].triggered;
+            LeftClick = PlayerInput.actions["LeftClick"].triggered;
+            RotateObject = PlayerInput.actions["RotateObject"].triggered;
+            OpenInterface = PlayerInput.actions["OpenInterface"].triggered;
         }
         
         public override string ToString() 

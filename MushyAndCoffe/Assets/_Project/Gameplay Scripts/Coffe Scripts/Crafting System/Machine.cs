@@ -9,11 +9,16 @@ using UnityEngine;
 
 namespace MushyAndCoffe.CraftingSystem
 {
-    public class Machine : MonoBehaviour, IInteractable, ISOContainer
+    public class Machine : MonoBehaviour, IInteractable, ISOContainer, IActivableUI
     {
         [SerializeField]
         private MachineSO machineSO;
         public ScriptableObject InteractableType { get {return machineSO;} set {} }
+        
+        [SerializeField]
+        private GameObject activableInterface;
+        public GameObject ActivableInterface { get {return activableInterface;} set {}}
+
         public List<IngredientSO> IngredientsStored;
         
         public void Interact(GameObject playerObject) 
@@ -22,6 +27,11 @@ namespace MushyAndCoffe.CraftingSystem
             
             if (machineSO.AllowedIngredients.Contains(playerInventory.item.GetComponent<ISOContainer>().InteractableType)) StoreIngredient(playerInventory.item);
             else DebugManager.Log(MessageTypes.Crafting, "Invalid");
+        }
+        
+        public void SetInterfaceVisivility(bool state) 
+        {
+            ActivableInterface.SetActive(state);
         }
 
         public bool StoreIngredient(GameObject ingredientObject) 
