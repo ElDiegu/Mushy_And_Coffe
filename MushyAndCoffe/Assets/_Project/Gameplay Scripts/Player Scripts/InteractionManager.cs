@@ -40,6 +40,7 @@ namespace MushyAndCoffe.Player
 			}
 		}
 
+		/*
 #if UNITY_EDITOR		
 		private void OnDrawGizmos()
 		{			
@@ -51,5 +52,6 @@ namespace MushyAndCoffe.Player
 				PlayerParameters.Instance.interactionRadius);
 		}
 #endif
+		*/
 	}
 }

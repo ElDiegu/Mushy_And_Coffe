@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace MushyAndCoffe
 {
-    public class CharacterMovementAnimation : MonoBehaviour
+    public class PlayerAnimationManager : MonoBehaviour
     {
         [SerializeField] private MovementManager movementManager;
         [SerializeField] private Animator animator;
