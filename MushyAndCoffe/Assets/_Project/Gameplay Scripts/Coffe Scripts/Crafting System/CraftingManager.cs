@@ -10,7 +10,7 @@ namespace MushyAndCoffe.CraftingSystem
 	{
 		public ScriptableObject CraftRecipe(Machine machine) 
 		{
-			var recipeToCraft = RecipesDatabase.FindRecipe(machine.IngredientsStored, machine.MachineSO);
+			var recipeToCraft = RecipesDatabase.FindRecipe(machine.IngredientsStored, (MachineSO)machine.InteractableType);
 			
 			DebugManager.Log(MessageTypes.Crafting, $"{recipeToCraft}");
 			
