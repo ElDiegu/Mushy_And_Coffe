@@ -13,7 +13,7 @@ namespace MushyAndCoffe.CraftingSystem
     {
         [SerializeField]
         private MachineSO machineSO;
-        public ScriptableObject InteractableType { get {return machineSO;} set {} }
+        public ScriptableObject ScriptableObject { get {return machineSO;} set {} }
         
         [SerializeField]
         private GameObject activableInterface;
@@ -25,7 +25,7 @@ namespace MushyAndCoffe.CraftingSystem
         {
             var playerInventory = playerObject.GetComponent<InventoryManager>();
             
-            if (machineSO.AllowedIngredients.Contains(playerInventory.item.GetComponent<ISOContainer>().InteractableType)) StoreIngredient(playerInventory.item);
+            if (machineSO.AllowedIngredients.Contains(playerInventory.item.GetComponent<ISOContainer>().ScriptableObject)) StoreIngredient(playerInventory.item);
             else DebugManager.Log(MessageTypes.Crafting, "Invalid");
         }
         
@@ -36,7 +36,7 @@ namespace MushyAndCoffe.CraftingSystem
 
         public bool StoreIngredient(GameObject ingredientObject) 
         {
-            var ingredientSO = (IngredientSO) ingredientObject.GetComponent<ISOContainer>().InteractableType;
+            var ingredientSO = (IngredientSO) ingredientObject.GetComponent<ISOContainer>().ScriptableObject;
             
             if (IngredientsStored.Contains(ingredientSO)) return false;
             

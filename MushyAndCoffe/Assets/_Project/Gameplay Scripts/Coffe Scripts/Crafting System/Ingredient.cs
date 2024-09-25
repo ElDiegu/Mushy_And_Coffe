@@ -11,7 +11,7 @@ namespace MushyAndCoffe.Items
     {
         [SerializeField]
         private IngredientSO ingredientSO;
-        public ScriptableObject InteractableType { get {return ingredientSO;} set {} }
+        public ScriptableObject ScriptableObject { get {return ingredientSO;} set {} }
 
         public void Interact(GameObject playerObject)
         {

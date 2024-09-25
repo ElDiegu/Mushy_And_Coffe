@@ -784,6 +784,9 @@ MonoBehaviour:
   usedCamera: {fileID: 1859252467}
   previewObject: {fileID: 0}
   cellSelector: {fileID: 0}
+  cellInformation:
+    m_Keys: []
+    m_Values: []
 --- !u!114 &1842444804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -859,7 +862,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

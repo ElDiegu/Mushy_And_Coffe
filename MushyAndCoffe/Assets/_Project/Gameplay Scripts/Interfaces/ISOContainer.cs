@@ -4,6 +4,6 @@ namespace MushyAndCoffe.Interfaces
 {
     public interface ISOContainer
     {
-        public abstract ScriptableObject InteractableType { get; set; }
+        public abstract ScriptableObject ScriptableObject { get; set; }
     }
 }

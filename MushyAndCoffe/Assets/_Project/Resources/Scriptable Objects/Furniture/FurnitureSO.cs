@@ -15,6 +15,6 @@ namespace MushyAndCoffe.ScriptableObjects
         public Vector2 Size { get; private set; }
 
         [field: SerializeField]
-        public GameObject Model { get; set; }
+        public GameObject Prefab { get; set; }
     }
 }
