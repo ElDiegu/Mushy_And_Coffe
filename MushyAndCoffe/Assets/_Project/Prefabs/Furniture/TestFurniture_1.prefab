@@ -117,6 +117,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8982092157536545398}
+  - component: {fileID: 1314333007520303802}
   m_Layer: 0
   m_Name: TestFurniture_1
   m_TagString: Untagged
@@ -140,3 +141,16 @@ Transform:
   - {fileID: 8608203088823903643}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1314333007520303802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5525149587395394709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92eca6534bbc42c4aba846fbd2139c0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  furnitureSO: {fileID: 11400000, guid: 61344e423e66f3847b3fad8e5e725139, type: 2}
