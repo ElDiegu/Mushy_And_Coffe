@@ -8,12 +8,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: DarkBrown
-    second: {fileID: 2100000, guid: 97a4c7d11cfbde34cbb331c17cd1b9cf, type: 2}
+    second: {fileID: 2100000, guid: 67907a4bb13f61448af177d633e2abdd, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material_leaves
-    second: {fileID: 2100000, guid: 9a94ce5b81136ef4da1aa06e8498151b, type: 2}
+    second: {fileID: 2100000, guid: 03fe64647f938cd4fa86807469176ec9, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

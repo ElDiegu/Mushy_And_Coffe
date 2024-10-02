@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: DarkBrown
-    second: {fileID: 2100000, guid: 9b8654fc3aacc8f438800b3da4c80b56, type: 2}
+    second: {fileID: 2100000, guid: 67907a4bb13f61448af177d633e2abdd, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

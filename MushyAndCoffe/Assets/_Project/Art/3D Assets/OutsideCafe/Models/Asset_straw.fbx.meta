@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material_straw
-    second: {fileID: 2100000, guid: 3eca2339e80b9c54f971da1579fa7314, type: 2}
+    second: {fileID: 2100000, guid: b8d7a5b9e46a7194e8a00f3b14a02b6a, type: 2}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
