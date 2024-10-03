@@ -21,9 +21,53 @@ MonoBehaviour:
     m_SerializedLabels:
     - ScriptableObject
     FlaggedDuringContentUpdateRestriction: 0
+    <IsFolder>k__BackingField: 0
+    <BundleFileId>k__BackingField: 
+    <IsSubAsset>k__BackingField: 0
+    m_CheckedIsScene: 0
+    m_IsScene: 0
+    m_CurrentHash:
+      'bytes[0]': 248
+      'bytes[1]': 184
+      'bytes[2]': 148
+      'bytes[3]': 183
+      'bytes[4]': 146
+      'bytes[5]': 208
+      'bytes[6]': 216
+      'bytes[7]': 61
+      'bytes[8]': 81
+      'bytes[9]': 219
+      'bytes[10]': 217
+      'bytes[11]': 58
+      'bytes[12]': 127
+      'bytes[13]': 153
+      'bytes[14]': 220
+      'bytes[15]': 22
+    m_cachedAssetPath: Assets/_Project/Resources/Scriptable Objects/Furniture
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 6d4ea4b1696dbff42b98397062becdf1, type: 2}
   m_SchemaSet:
     m_Schemas:
     - {fileID: 11400000, guid: 17996145735663c4c8eac046ac8b51fc, type: 2}
     - {fileID: 11400000, guid: ba9a58aedd033174bbd1e3227d775086, type: 2}
+  m_FolderEntryCache: []
+  <FlaggedDuringContentUpdateRestriction>k__BackingField: 0
+  m_CurrentHash:
+    'bytes[0]': 40
+    'bytes[1]': 162
+    'bytes[2]': 185
+    'bytes[3]': 36
+    'bytes[4]': 27
+    'bytes[5]': 118
+    'bytes[6]': 151
+    'bytes[7]': 83
+    'bytes[8]': 30
+    'bytes[9]': 70
+    'bytes[10]': 197
+    'bytes[11]': 255
+    'bytes[12]': 81
+    'bytes[13]': 203
+    'bytes[14]': 232
+    'bytes[15]': 113

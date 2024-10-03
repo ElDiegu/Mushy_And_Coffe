@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbe486eacb550924eb6c9213de6eaa6e, type: 3}
   m_Name: Fridge1
   m_EditorClassIdentifier: 
-  <ID>k__BackingField: 0
-  <Name>k__BackingField: 
-  <Size>k__BackingField: {x: 0, y: 0}
-  <Prefab>k__BackingField: {fileID: 0}
+  <ID>k__BackingField: 7
+  <Name>k__BackingField: Fridge1
+  <Size>k__BackingField: {x: 1, y: 1}
+  <Prefab>k__BackingField: {fileID: 949456611043057717, guid: db2ca45a3ca198a45a9561b4d3691d91, type: 3}

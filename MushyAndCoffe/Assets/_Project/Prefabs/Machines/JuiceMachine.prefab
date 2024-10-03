@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4113452207227854289}
+  - component: {fileID: -7133496989284210353}
   m_Layer: 0
   m_Name: JuiceMachine
   m_TagString: Untagged
@@ -32,6 +33,19 @@ Transform:
   - {fileID: 2104451200503048426}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-7133496989284210353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8920652193728394514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92eca6534bbc42c4aba846fbd2139c0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  furnitureSO: {fileID: 11400000, guid: 7ce9aa37214951f44bc3a8070ad21ff9, type: 2}
 --- !u!1001 &1927041784150331137
 PrefabInstance:
   m_ObjectHideFlags: 0
