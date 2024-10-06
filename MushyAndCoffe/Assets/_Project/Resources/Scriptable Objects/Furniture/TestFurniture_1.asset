@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cbe486eacb550924eb6c9213de6eaa6e, type: 3}
-  m_Name: TestFurniture_0
+  m_Name: TestFurniture_1
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 0
-  <Name>k__BackingField: TestFurniture_0
-  <Size>k__BackingField: {x: 1, y: 1}
-  <Prefab>k__BackingField: {fileID: 5771156779857223623, guid: 9806ecf432213364e8bb98edb6c91820, type: 3}
+  <Name>k__BackingField: 
+  <Size>k__BackingField: {x: 0, y: 0}
+  <Prefab>k__BackingField: {fileID: 0}
   <Surface>k__BackingField: 0
