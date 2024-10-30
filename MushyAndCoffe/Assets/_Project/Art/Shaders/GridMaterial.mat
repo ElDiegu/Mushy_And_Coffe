@@ -53,10 +53,10 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Thickness: 0.05
+    - _Thickness: 0.1
     m_Colors:
     - _DefaultScale: {r: 10, g: 10, b: 0, a: 0}
-    - _GridColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GridColor: {r: 0.66415983, g: 0.67671263, b: 0.7075472, a: 1}
     - _Size: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
