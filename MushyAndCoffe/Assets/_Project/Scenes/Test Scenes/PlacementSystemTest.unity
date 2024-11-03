@@ -162,7 +162,7 @@ Grid:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 84402902}
   m_Enabled: 1
-  m_CellSize: {x: 1, y: 0, z: 1}
+  m_CellSize: {x: 1, y: 1, z: 1}
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
@@ -715,6 +715,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 2cdcb0f3-3f97-4c1b-8e4b-cf5b5039a03d
     m_ActionName: 'Player/OpenInterface[/Keyboard/q]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 19e99197-1453-4da8-b4bb-6805c02ca446
+    m_ActionName: 'Player/Delete[/Keyboard/backspace]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -732,15 +736,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5d9067eac56f4943a67accb0423d3b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedObject: {fileID: 9185051391552891375, guid: 034766569446cc64197a25f86f484681, type: 3}
+  previewObject: {fileID: 0}
+  selectedFurniture: {fileID: 11400000, guid: eea94fdb532d7944682b595a0b941ef3, type: 2}
   cellSelected: {fileID: 5328201957232058109, guid: 3087bff12349bae449f2fdc80dbb234d, type: 3}
+  selectedObject: {fileID: 9185051391552891375, guid: 034766569446cc64197a25f86f484681, type: 3}
+  objectToPlace: {fileID: 0}
   grid: {fileID: 84402904}
   placementLayerMask:
     serializedVersion: 2
     m_Bits: 128
+  furnitureLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   usedCamera: {fileID: 1859252467}
-  previewObject: {fileID: 0}
   cellSelector: {fileID: 0}
+  placementMode: 0
   cellInformation:
     m_Keys: []
     m_Values: []

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using MushyAndCoffe.Enums;
 using MushyAndCoffe.Events;
 using MushyAndCoffe.Extensions;
 using MushyAndCoffe.Managers;
@@ -9,186 +10,206 @@ using UnityEngine.Rendering;
 
 namespace MushyAndCoffe.PlacementSystem
 {
-	public class PlacementManager : Singleton<PlacementManager>
-	{
-		[SerializeField] private GameObject selectedObject, cellSelected;
-		[SerializeField] private Grid grid;
-		[SerializeField] private LayerMask placementLayerMask;
-		[SerializeField] private Camera usedCamera;
-		[SerializeField] private GameObject previewObject = null;
-		[SerializeField] private GameObject cellSelector = null;
-		private Physics physics;
-		
-		[SerializeField] private SerializedDictionary<Vector3Int, GameObject> cellInformation = new SerializedDictionary<Vector3Int, GameObject>();
-		
-#region Events      
-		EventBinding<SelectFurnitureEvent> selectFurnitureEvent;
-#endregion
-		
-		
-		
-#region Unity Methods
-		private void OnEnable()
-		{
-			selectFurnitureEvent = new EventBinding<SelectFurnitureEvent>(ChangeSelectedObject);
-			EventBus<SelectFurnitureEvent>.Register(selectFurnitureEvent);
-		}
+    public class PlacementManager : Singleton<PlacementManager>
+    {
+        [Header("System Parameters")]
+        [SerializeField] private FurnitureSO selectedFurniture = null;
+        [SerializeField] private Grid grid;
+        [SerializeField] private Camera usedCamera;
+        private Physics physics;
+        public PlacementMode placementMode;
 
-		private void Update()
-		{
-			var input = InputManager.Instance.GetInput();
+        [Header("Preview")]
+        [SerializeField] private GameObject previewObject = null;
+        [SerializeField] private GameObject cellSelected;
+        [SerializeField] private LayerMask placementLayerMask, furnitureLayerMask;
+        [SerializeField] private GameObject cellSelector = null;
 
-			if (input.LeftClick) PlaceObject();
-			
-			if (input.RotateObject) RotateObject(90);
-			
-			UpdatePreview();
-		}
-#endregion
-		
-		private void PlaceObject() 
-		{
-			bool hit = physics.MouseRaycastFromCamera(Input.mousePosition, usedCamera, 100f, placementLayerMask, out Vector3 clickLocation);
-			
-			if (!hit) return;
-			
-			var cell = grid.WorldToCell(clickLocation);
-			var furnitureSO = (FurnitureSO) selectedObject.GetComponent<Furniture>().ScriptableObject;
-			
-			if (!CheckIfPlacementAllowed(furnitureSO, cell)) return;
-			
-			var furnitureCreated = Instantiate(selectedObject, previewObject.transform.position, previewObject.transform.rotation);
-			
-			OccupyCells(GetOccupiedCells(furnitureSO, cell), furnitureCreated);
-		}
-		
-		private void RotateObject(float degrees) 
-		{
-			// We can't rotate wall objects
-			if (((FurnitureSO)selectedObject.GetComponent<Furniture>().ScriptableObject).Surface == FurnitureSO.FurnitureSurface.Wall) return;
-			
-			// We can't rotate the preview if it doesn't exists
-			if (previewObject == null) return;
-			
-			var previewRotation = previewObject.transform.rotation;
-			
-			if (previewRotation.y + degrees >= 360) previewRotation.y = 0f;
-			else previewRotation = Quaternion.Euler(previewRotation.eulerAngles.x, previewRotation.eulerAngles.y + degrees, previewRotation.eulerAngles.z);
-		}
-		
-		private void ChangeSelectedObject(SelectFurnitureEvent selectFurnitureEvent) 
-		{
-			selectedObject = selectFurnitureEvent.selectedFurniture;
-		}
+        private void Update()
+        {
+            var input = InputManager.Instance.GetInput();
 
-#region Object preview
-		private void UpdatePreview() 
-		{
-			bool hitDetected = physics.MouseRaycastFromCamera(Input.mousePosition, usedCamera, 100f, placementLayerMask, out RaycastHit hit);
-			
-			var clickLocation = hit.point;
-			
-			if (!hitDetected || selectedObject == null) 
-			{
-				ClearPreview();
-				return;	
-			}
-			
-			var furnitureSurface = ((FurnitureSO)selectedObject.GetComponent<Furniture>().ScriptableObject).Surface;
-			
-			if (furnitureSurface == FurnitureSO.FurnitureSurface.Floor) UpdateFloorPreview(hit, clickLocation);
-			
-			if (furnitureSurface == FurnitureSO.FurnitureSurface.Wall) UpdateWallPreview(hit, clickLocation);
-			
-			UpdateCellSelector(hit, clickLocation);
-		}
-		
-		private void UpdateFloorPreview(RaycastHit hit, Vector3 clickLocation) 
-		{
-			if (hit.normal != Vector3.up) return;
-			
-			if (previewObject == null) previewObject = Instantiate(selectedObject, clickLocation, new Quaternion());
-			
-			var cell = grid.WorldToCell(clickLocation);
+            if (input.LeftClick) 
+                switch (placementMode)
+                {
+                    case PlacementMode.Placement:
+                        PlaceObject();
+                        break;
+                    case PlacementMode.Selection:
+                        if (selectedFurniture == null) SelectPlacedObject();
+                        else PlaceObject();
+                        break;
+                }
 
-			previewObject.transform.position = grid.GetCellCenterWorld(cell) - new Vector3(0f, 0.5f, 0f);
-		}
-		
-		private void UpdateWallPreview(RaycastHit hit, Vector3 clickLocation) 
-		{
-			if (hit.normal == Vector3.up) return;
-			
-			if (previewObject == null) previewObject = Instantiate(selectedObject, clickLocation, Quaternion.LookRotation(hit.normal));
+            if (input.RotateObject) RotateObject(90);
 
-			var cell = grid.WorldToCell(clickLocation);
+            if (input.Delete) DeleteFurniture();
 
-			previewObject.transform.position = grid.GetCellCenterWorld(cell) - new Vector3(0f, 0.5f, 0f);
-			previewObject.transform.rotation = Quaternion.LookRotation(hit.normal);
-		}
-		
-		private void UpdateCellSelector(RaycastHit hit, Vector3 clickLocation) 
-		{
-			if (cellSelector == null) cellSelector = Instantiate(cellSelected, clickLocation, new Quaternion());
-			
-			var cell = grid.WorldToCell(clickLocation);
-			
-			cellSelector.transform.position = grid.GetCellCenterWorld(cell) - new Vector3(0f, 0.5f, 0f);
-		}
-		
-		private void ClearPreview() 
-		{
-			if (previewObject != null) Destroy(previewObject);
-			if (cellSelector != null) Destroy(cellSelector);
-		}
-#endregion
+            UpdatePreview();
+        }
 
-#region Grid info storage		
-		private List<Vector3Int> GetOccupiedCells(FurnitureSO furniture, Vector3Int cell) 
-		{
-			var cells = new List<Vector3Int>();
-			
-			for (int i = 0; i < furniture.Size.x; i++) 
-			{
-				for (int j = 0; j < furniture.Size.y; j++) 
-				{
-					cells.Add(new Vector3Int(cell.x + i, cell.y, cell.z + j));
-				}
-			}
-			
-			return cells;
-		}
-		
-		private bool CheckIfPlacementAllowed(FurnitureSO furniture, Vector3Int cell) 
-		{
-			var occupiedCells = GetOccupiedCells(furniture, cell);
-			
-			foreach (Vector3Int key in cellInformation.Keys) 
-			{
-				if (occupiedCells.Contains(key)) return false;
-			}
-			
-			return true;
-		}
-		
-		private void OccupyCells(List<Vector3Int> occupiedCells, GameObject occupyingObject) 
-		{
-			foreach (Vector3Int occupiedCell in occupiedCells) cellInformation.Add(occupiedCell, occupyingObject);
-		}
-#endregion
-		
+        public void ChangePlacementMode(PlacementMode placementMode)
+        {
+            this.placementMode = placementMode;
+            selectedFurniture = null;
+            DeletePreview();
+        }
+
+        private void PlaceObject()
+        {
+            if (previewObject == null) return;
+
+            bool hit = physics.MouseRaycastFromCamera(Input.mousePosition, usedCamera, 100f, placementLayerMask, out Vector3 clickLocation);
+
+            if (!hit) return;
+
+            var cell = grid.WorldToCell(clickLocation);
+            var furnitureSO = previewObject.GetComponent<Furniture>().ScriptableObject as FurnitureSO;
+
+            if (!RoomData.IsPlacementAllowed(furnitureSO, cell)) return;
+
+            var furnitureObject = Instantiate(previewObject, previewObject.transform.position, previewObject.transform.rotation);
+
+            RoomData.OccupyCells(furnitureSO, cell, furnitureObject);
+
+            if (placementMode == PlacementMode.Selection)
+            {
+                selectedFurniture = null;
+                DeletePreview();
+            }
+        }
+
+        private void RotateObject(float degrees)
+        {
+            // We can't rotate the object if it doesn't exists
+            if (previewObject == null) return;
+
+            // We can't rotate wall objects
+            if ((previewObject.GetComponent<Furniture>().ScriptableObject as FurnitureSO).Surface == FurnitureSurface.Wall) return;
+
+            var objectRotation = previewObject.transform.rotation;
+
+            if (objectRotation.y + degrees >= 360) objectRotation.y = 0f;
+            else objectRotation = Quaternion.Euler(objectRotation.eulerAngles.x, objectRotation.eulerAngles.y + degrees, objectRotation.eulerAngles.z);
+
+            previewObject.transform.rotation = objectRotation;
+        }
+
+        private void SelectPlacedObject()
+        {
+            var hitDetected = physics.MouseRaycastFromCamera(Input.mousePosition, usedCamera, 100f, furnitureLayerMask, out RaycastHit hit);
+
+            Debug.Log(hitDetected);
+
+            if (!hitDetected) return;
+
+            previewObject = hit.collider.gameObject;
+            selectedFurniture = previewObject.GetComponent<Furniture>().ScriptableObject as FurnitureSO;
+
+            RoomData.LiberateCells(previewObject);
+        }
+
+        private void DeleteFurniture()
+        {
+            selectedFurniture = null;
+            DeletePreview();
+            // TODO: add one item to the inventory when deleting
+        }
+
+        #region Object preview
+        private void UpdatePreview()
+        {
+            if (selectedFurniture == null) return;
+
+            bool hitDetected = physics.MouseRaycastFromCamera(Input.mousePosition, usedCamera, 100f, placementLayerMask, out RaycastHit hit);
+
+            var clickLocation = hit.point;
+
+            if (!hitDetected)
+            {
+                if (previewObject != null) SetPreviewState(false);
+                return;
+            }
+
+            // If we're in placement mode, have a selected furniture and we don't have a preview, we instantiate it
+            if (previewObject == null && placementMode == PlacementMode.Placement && selectedFurniture != null)
+                previewObject = Instantiate(selectedFurniture.Prefab, clickLocation, new Quaternion());
+
+            // We hide floor furniture when over wall and wall furniture when over floor
+            if (hit.normal == Vector3.up && selectedFurniture.Surface == FurnitureSurface.Floor)
+                SetPreviewState(true);
+            else if (hit.normal != Vector3.up && selectedFurniture.Surface == FurnitureSurface.Wall)
+                SetPreviewState(true);
+            else SetPreviewState(false);
+
+            var cell = grid.WorldToCell(clickLocation);
+
+            previewObject.transform.position = grid.GetCellCenterWorld(cell) - new Vector3(0, 0.5f, 0f);
+            if (selectedFurniture.Surface == FurnitureSurface.Wall) previewObject.transform.rotation = Quaternion.LookRotation(hit.normal);
+
+            UpdateCellSelector(hit, clickLocation);
+        }
+
+        private void UpdateCellSelector(RaycastHit hit, Vector3 clickLocation)
+        {
+            // TODO: rotate cell marker when placing a wall object
+
+            if (cellSelector == null) cellSelector = Instantiate(cellSelected, clickLocation, new Quaternion());
+
+            var cell = grid.WorldToCell(clickLocation);
+
+            cellSelector.transform.position = grid.GetCellCenterWorld(cell) - new Vector3(0f, 0.5f, 0f);
+        }
+
+        private void DeletePreview()
+        {
+            if (previewObject != null) Destroy(previewObject);
+            if (cellSelector != null) Destroy(cellSelector);
+        }
+
+        private void SetPreviewState(bool state)
+        {
+            if (previewObject != null) previewObject.SetActive(state);
+            if (cellSelector != null) cellSelector.SetActive(state);
+        }
+        #endregion
+
 #if UNITY_EDITOR
-		private void OnDrawGizmos() 
-		{
-			Gizmos.color = Color.red;
-			
-			bool hit = physics.MouseRaycastFromCamera(Input.mousePosition, usedCamera, 100f, placementLayerMask, out RaycastHit raycastHit);
-			
-			if (hit) 
-			{
-				Gizmos.DrawSphere(raycastHit.point, 0.2f);
-				Gizmos.DrawLine(raycastHit.point, raycastHit.point + raycastHit.normal);
-			}
-		}
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+
+            bool hit = physics.MouseRaycastFromCamera(Input.mousePosition, usedCamera, 100f, placementLayerMask, out RaycastHit raycastHit);
+
+            if (hit)
+            {
+                Gizmos.DrawSphere(raycastHit.point, 0.2f);
+                Gizmos.DrawLine(raycastHit.point, raycastHit.point + raycastHit.normal);
+            }
+        }
 #endif
-	}
+
+        /*
+        #region Events      
+                EventBinding<OnSelectFurnitureEvent> selectFurnitureEvent;
+
+                private void OnEnable()
+                {
+                    selectFurnitureEvent = new EventBinding<OnSelectFurnitureEvent>(ChangeObjectToPlace);
+                    EventBus<OnSelectFurnitureEvent>.Register(selectFurnitureEvent);
+                }
+
+                private void OnDisable() 
+                {
+                    EventBus<OnSelectFurnitureEvent>.Deregister(selectFurnitureEvent);
+                }
+        #endregion
+        */
+    }
+
+    public enum PlacementMode
+    {
+        Placement,
+        Selection
+    }
 }
