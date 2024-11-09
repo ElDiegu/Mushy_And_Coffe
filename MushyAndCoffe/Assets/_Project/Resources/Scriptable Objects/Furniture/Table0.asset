@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Table0
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 0
-  <Name>k__BackingField: Table0
-  <Size>k__BackingField: {x: 1, y: 1}
+  <Name>k__BackingField: Mesa I
+  <Description>k__BackingField: Para dos personas.
+  <Size>k__BackingField: {x: 1, y: 1, z: 0}
   <Prefab>k__BackingField: {fileID: 8521798196293981920, guid: 635a78624bb19074b826c7f71e80621c, type: 3}
+  <Surface>k__BackingField: 0
+  <Icon>k__BackingField: {fileID: 21300000, guid: 574d5d52deaf6b14ba722f4fa7dc1ed0, type: 3}

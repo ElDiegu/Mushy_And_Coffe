@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Block0
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 2
-  <Name>k__BackingField: Block0
-  <Size>k__BackingField: {x: 1, y: 1}
+  <Name>k__BackingField: Bloque
+  <Description>k__BackingField: Una simple encimera donde apoyar objetos.
+  <Size>k__BackingField: {x: 1, y: 1, z: 0}
   <Prefab>k__BackingField: {fileID: 4713448955074610719, guid: b5121ddee183c6b4788eae8e1a16d2b6, type: 3}
+  <Surface>k__BackingField: 0
+  <Icon>k__BackingField: {fileID: 21300000, guid: 17eca6cc59ef6554db9897eff00a8e8a, type: 3}

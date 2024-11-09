@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: DrinksFridge
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 6
-  <Name>k__BackingField: DrinksFridge
-  <Size>k__BackingField: {x: 1, y: 1}
+  <Name>k__BackingField: Nevera de Refrescos
+  <Description>k__BackingField: Almacena refrescos de diferentes sabores.
+  <Size>k__BackingField: {x: 1, y: 1, z: 0}
   <Prefab>k__BackingField: {fileID: 6630304615462108550, guid: 5eff45e1c5edef144a15e12a845b40a5, type: 3}
+  <Surface>k__BackingField: 0
+  <Icon>k__BackingField: {fileID: 21300000, guid: d83d7fabb2a84e441ab15b31593ba23b, type: 3}

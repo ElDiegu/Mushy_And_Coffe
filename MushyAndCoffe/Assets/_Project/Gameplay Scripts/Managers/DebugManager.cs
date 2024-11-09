@@ -30,7 +30,7 @@ namespace MushyAndCoffe.Managers
 		{
 			if (!checks.ContainsKey(check.ToString())) return;
 			if (!checks[check.ToString()]) return;
-			Debug.Log(message);
+			//Debug.Log(message);
 		}
 
 		protected override void Awake()

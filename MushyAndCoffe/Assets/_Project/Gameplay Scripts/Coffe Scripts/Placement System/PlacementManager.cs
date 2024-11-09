@@ -135,6 +135,7 @@ namespace MushyAndCoffe.PlacementSystem
             if (previewObject == null && placementMode == PlacementMode.Placement && selectedFurniture != null)
                 previewObject = Instantiate(selectedFurniture.Prefab, clickLocation, new Quaternion());
 
+            ChangeAlphaVisibility();
             // We hide floor furniture when over wall and wall furniture when over floor
             if (hit.normal == Vector3.up && selectedFurniture.Surface == FurnitureSurface.Floor)
                 SetPreviewState(true);
@@ -171,6 +172,24 @@ namespace MushyAndCoffe.PlacementSystem
         {
             if (previewObject != null) previewObject.SetActive(state);
             if (cellSelector != null) cellSelector.SetActive(state);
+        }
+
+        private void ChangeAlphaVisibility()
+        {
+            Renderer[] renderers = previewObject.GetComponentsInChildren<Renderer>();
+            foreach (Renderer renderer in renderers)
+            {
+                Material[] materials = renderer.materials;
+                foreach (Material material in materials)
+                {
+                    material.SetFloat("_Transparency", 0.9f);
+                }
+            }
+        }
+        public void ChangePreviewObject(GameObject newPreviewObject)
+        {
+            selectedFurniture = newPreviewObject.GetComponent<Furniture>().ScriptableObject as FurnitureSO;
+            DeletePreview();
         }
         #endregion
 

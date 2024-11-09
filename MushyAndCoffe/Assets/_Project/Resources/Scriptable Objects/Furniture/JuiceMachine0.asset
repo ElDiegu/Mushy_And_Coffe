@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: JuiceMachine0
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 0
-  <Name>k__BackingField: JuiceMachine0
-  <Size>k__BackingField: {x: 1, y: 1}
+  <Name>k__BackingField: "M\xE1quina de Zumo II"
+  <Description>k__BackingField: Para hacer zumos de naranja deliciosos.
+  <Size>k__BackingField: {x: 1, y: 1, z: 0}
   <Prefab>k__BackingField: {fileID: 8920652193728394514, guid: 98693741ba6f7f54ab6238c92b665aa8, type: 3}
+  <Surface>k__BackingField: 0
+  <Icon>k__BackingField: {fileID: 21300000, guid: 2efda22a571963845b4c393a258d6020, type: 3}

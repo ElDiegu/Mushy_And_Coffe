@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Sink0
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 10
-  <Name>k__BackingField: Sink0
-  <Size>k__BackingField: {x: 1, y: 1}
+  <Name>k__BackingField: Pila
+  <Description>k__BackingField: Suministra agua potable.
+  <Size>k__BackingField: {x: 1, y: 1, z: 0}
   <Prefab>k__BackingField: {fileID: 2597683637136953818, guid: 025db9e4d9c0a624eb87a742c662203f, type: 3}
+  <Surface>k__BackingField: 0
+  <Icon>k__BackingField: {fileID: 21300000, guid: 15f6d0625d4e9024eb1a422ef61b3800, type: 3}

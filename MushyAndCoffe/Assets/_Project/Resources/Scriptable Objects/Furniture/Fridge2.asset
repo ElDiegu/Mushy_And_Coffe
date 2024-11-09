@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Fridge2
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 8
-  <Name>k__BackingField: Fridge2
-  <Size>k__BackingField: {x: 1, y: 1}
+  <Name>k__BackingField: Nevera I
+  <Description>k__BackingField: "Almacena en fr\xEDo hasta 5 productos."
+  <Size>k__BackingField: {x: 1, y: 1, z: 0}
   <Prefab>k__BackingField: {fileID: 7194085937228821132, guid: f60ed8f032187984cb687f00988f56b2, type: 3}
+  <Surface>k__BackingField: 0
+  <Icon>k__BackingField: {fileID: 21300000, guid: 9f061df60e688814bac09fea57747154, type: 3}
