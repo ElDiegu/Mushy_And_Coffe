@@ -27,7 +27,10 @@ namespace MushyAndCoffe.ScriptableObjects
 
         [field: SerializeField]
         public Sprite Icon { get; private set; }
-
+        
+        [field: SerializeField]
+        public FurnitureStackType Stack { get; private set; }
+  
         public HashSet<Vector3Int> GetOccupyingCells(Vector3Int pivotCell) 
         {
             HashSet<Vector3Int> cellSet = new HashSet<Vector3Int>() { pivotCell };

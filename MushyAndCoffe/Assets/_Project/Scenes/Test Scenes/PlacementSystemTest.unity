@@ -287,6 +287,67 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5c2586f5323e174295200da23c57540, type: 3}
+--- !u!1001 &542974659
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5328201957232058109, guid: 3087bff12349bae449f2fdc80dbb234d, type: 3}
+      propertyPath: m_Name
+      value: SelectedCellMarker
+      objectReference: {fileID: 0}
+    - target: {fileID: 5328201957232058109, guid: 3087bff12349bae449f2fdc80dbb234d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5876200437112411510, guid: 3087bff12349bae449f2fdc80dbb234d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5876200437112411510, guid: 3087bff12349bae449f2fdc80dbb234d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5876200437112411510, guid: 3087bff12349bae449f2fdc80dbb234d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5876200437112411510, guid: 3087bff12349bae449f2fdc80dbb234d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5876200437112411510, guid: 3087bff12349bae449f2fdc80dbb234d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5876200437112411510, guid: 3087bff12349bae449f2fdc80dbb234d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5876200437112411510, guid: 3087bff12349bae449f2fdc80dbb234d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5876200437112411510, guid: 3087bff12349bae449f2fdc80dbb234d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5876200437112411510, guid: 3087bff12349bae449f2fdc80dbb234d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5876200437112411510, guid: 3087bff12349bae449f2fdc80dbb234d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3087bff12349bae449f2fdc80dbb234d, type: 3}
 --- !u!1 &587201858
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,6 +488,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1473490720 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5328201957232058109, guid: 3087bff12349bae449f2fdc80dbb234d, type: 3}
+  m_PrefabInstance: {fileID: 542974659}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1473763074
 GameObject:
   m_ObjectHideFlags: 0
@@ -736,24 +802,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5d9067eac56f4943a67accb0423d3b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previewObject: {fileID: 0}
   selectedFurniture: {fileID: 11400000, guid: eea94fdb532d7944682b595a0b941ef3, type: 2}
-  cellSelected: {fileID: 5328201957232058109, guid: 3087bff12349bae449f2fdc80dbb234d, type: 3}
-  selectedObject: {fileID: 9185051391552891375, guid: 034766569446cc64197a25f86f484681, type: 3}
-  objectToPlace: {fileID: 0}
   grid: {fileID: 84402904}
+  usedCamera: {fileID: 1859252467}
+  placementMode: 0
+  previewObject: {fileID: 0}
+  cellSelected: {fileID: 5328201957232058109, guid: 3087bff12349bae449f2fdc80dbb234d, type: 3}
   placementLayerMask:
     serializedVersion: 2
     m_Bits: 128
   furnitureLayerMask:
     serializedVersion: 2
     m_Bits: 0
-  usedCamera: {fileID: 1859252467}
-  cellSelector: {fileID: 0}
-  placementMode: 0
-  cellInformation:
-    m_Keys: []
-    m_Values: []
+  cellSelector: {fileID: 1473490720}
 --- !u!114 &1842444804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1067,6 +1128,7 @@ SceneRoots:
   - {fileID: 1859252468}
   - {fileID: 1886534581}
   - {fileID: 508715204}
+  - {fileID: 542974659}
   - {fileID: 587201859}
   - {fileID: 302741097}
   - {fileID: 1530063512}

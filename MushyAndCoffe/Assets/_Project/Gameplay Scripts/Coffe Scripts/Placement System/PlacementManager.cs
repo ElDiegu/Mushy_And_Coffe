@@ -4,7 +4,7 @@ using MushyAndCoffe.Events;
 using MushyAndCoffe.Extensions;
 using MushyAndCoffe.Managers;
 using MushyAndCoffe.ScriptableObjects;
-using MushyAndCoffe.Systems.EventSystem;
+using EventSystem;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -63,10 +63,8 @@ namespace MushyAndCoffe.PlacementSystem
 
             if (!hit) return;
 
-            var cell = grid.WorldToCell(clickLocation);
+            var cell = grid.WorldToCell(previewObject.transform.position);
             var furnitureSO = previewObject.GetComponent<Furniture>().ScriptableObject as FurnitureSO;
-
-            if (!RoomData.IsPlacementAllowed(furnitureSO, cell)) return;
 
             var furnitureObject = Instantiate(previewObject, previewObject.transform.position, previewObject.transform.rotation);
 
@@ -142,30 +140,39 @@ namespace MushyAndCoffe.PlacementSystem
             else if (hit.normal != Vector3.up && selectedFurniture.Surface == FurnitureSurface.Wall)
                 SetPreviewState(true);
             else SetPreviewState(false);
-
-            var cell = grid.WorldToCell(clickLocation);
-
-            previewObject.transform.position = grid.GetCellCenterWorld(cell) - new Vector3(0, 0.5f, 0f);
+            
             if (selectedFurniture.Surface == FurnitureSurface.Wall) previewObject.transform.rotation = Quaternion.LookRotation(hit.normal);
 
-            UpdateCellSelector(hit, clickLocation);
-        }
-
-        private void UpdateCellSelector(RaycastHit hit, Vector3 clickLocation)
-        {
-            // TODO: rotate cell marker when placing a wall object
-
-            if (cellSelector == null) cellSelector = Instantiate(cellSelected, clickLocation, new Quaternion());
-
             var cell = grid.WorldToCell(clickLocation);
-
-            cellSelector.transform.position = grid.GetCellCenterWorld(cell) - new Vector3(0f, 0.5f, 0f);
+            
+            var cellDetected = DetermineCell(cell, out cell);
+            
+            if (!cellDetected) SetPreviewState(false);
+            else previewObject.transform.position = grid.GetCellCenterWorld(cell) - new Vector3(0, 0.5f, 0f);
+            
+            if (previewObject.activeSelf) cellSelector.transform.position = grid.GetCellCenterWorld(cell);
         }
 
+        private bool DetermineCell(Vector3Int referenceCell, out Vector3Int cell) 
+        {
+            cell = referenceCell;
+            
+            if (RoomData.IsPlacementAllowed(selectedFurniture, referenceCell)) return true;
+            
+            if (!RoomData.IsPlacementAllowed(selectedFurniture, referenceCell + Vector3Int.up)) return false;
+            
+            if (RoomData.GetFurnitureSOAt(referenceCell).Stack == FurnitureStackType.NoStack) return false;
+            
+            if (selectedFurniture.Stack != FurnitureStackType.Small) return false;
+            
+            cell = referenceCell + Vector3Int.up;
+            return true;
+        }
+        
         private void DeletePreview()
         {
+            cellSelector.transform.SetParent(null, false);
             if (previewObject != null) Destroy(previewObject);
-            if (cellSelector != null) Destroy(cellSelector);
         }
 
         private void SetPreviewState(bool state)
@@ -207,23 +214,6 @@ namespace MushyAndCoffe.PlacementSystem
             }
         }
 #endif
-
-        /*
-        #region Events      
-                EventBinding<OnSelectFurnitureEvent> selectFurnitureEvent;
-
-                private void OnEnable()
-                {
-                    selectFurnitureEvent = new EventBinding<OnSelectFurnitureEvent>(ChangeObjectToPlace);
-                    EventBus<OnSelectFurnitureEvent>.Register(selectFurnitureEvent);
-                }
-
-                private void OnDisable() 
-                {
-                    EventBus<OnSelectFurnitureEvent>.Deregister(selectFurnitureEvent);
-                }
-        #endregion
-        */
     }
 
     public enum PlacementMode

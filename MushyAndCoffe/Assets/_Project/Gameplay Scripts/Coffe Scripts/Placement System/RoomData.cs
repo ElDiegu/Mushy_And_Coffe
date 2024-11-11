@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MushyAndCoffe.Events;
 using MushyAndCoffe.ScriptableObjects;
-using MushyAndCoffe.Systems.EventSystem;
+using EventSystem;
 using UnityEngine;
 
 namespace MushyAndCoffe.PlacementSystem
@@ -42,5 +42,9 @@ namespace MushyAndCoffe.PlacementSystem
         }
         
         public static void LiberateCells(GameObject furnitureObject) => LiberateCells(ObjectInfoDictionary[furnitureObject]); 
+        
+        public static GameObject GetFurnitureAt(Vector3Int cell) => CellInfoDictionary[cell];
+        
+        public static FurnitureSO GetFurnitureSOAt(Vector3Int cell) => GetFurnitureAt(cell).GetComponent<Furniture>().ScriptableObject as FurnitureSO;
     }
 }
