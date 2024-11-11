@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using MushyAndCoffe.Managers;
-using MushyAndCoffe.Systems.EventSystem;
 using UnityEditor;
 using UnityEngine;
 
-namespace MushyAndCoffe.Utils
+namespace EventSystem
 {
 	public static class EventBusUtil
 	{

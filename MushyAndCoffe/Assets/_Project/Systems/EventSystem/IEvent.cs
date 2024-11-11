@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace MushyAndCoffe.Systems.EventSystem
+namespace EventSystem
 {
     public interface IEvent { }
 }

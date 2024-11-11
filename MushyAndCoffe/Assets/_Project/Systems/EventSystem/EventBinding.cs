@@ -1,6 +1,6 @@
 using System;
 
-namespace MushyAndCoffe.Systems.EventSystem
+namespace EventSystem
 {
 	internal interface IEventBinding<T>
 	{

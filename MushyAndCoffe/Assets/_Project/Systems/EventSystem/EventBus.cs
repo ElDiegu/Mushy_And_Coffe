@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using MushyAndCoffe.Managers;
 
-namespace MushyAndCoffe.Systems.EventSystem
+namespace EventSystem
 {
 	public static class EventBus<T> where T : IEvent 
 	{
