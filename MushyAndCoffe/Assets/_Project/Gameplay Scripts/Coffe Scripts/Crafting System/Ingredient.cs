@@ -2,7 +2,7 @@ using MushyAndCoffe.Events;
 using MushyAndCoffe.Interfaces;
 using MushyAndCoffe.Managers;
 using MushyAndCoffe.ScriptableObjects;
-using MushyAndCoffe.Systems.EventSystem;
+using EventSystem;
 using UnityEngine;
 
 namespace MushyAndCoffe.Items

@@ -1,6 +1,6 @@
 using MushyAndCoffe.PlacementSystem;
 using MushyAndCoffe.ScriptableObjects;
-using MushyAndCoffe.Systems.EventSystem;
+using EventSystem;
 using UnityEngine;
 using UnityEngine.UI;
 

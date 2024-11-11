@@ -1,6 +1,6 @@
 using MushyAndCoffe.Events;
 using MushyAndCoffe.Managers;
-using MushyAndCoffe.Systems.EventSystem;
+using EventSystem;
 using UnityEngine;
 
 namespace MushyAndCoffe.Player

@@ -1,5 +1,5 @@
 using MushyAndCoffe.ScriptableObjects;
-using MushyAndCoffe.Systems.EventSystem;
+using EventSystem;
 using UnityEngine;
 
 namespace MushyAndCoffe.Events

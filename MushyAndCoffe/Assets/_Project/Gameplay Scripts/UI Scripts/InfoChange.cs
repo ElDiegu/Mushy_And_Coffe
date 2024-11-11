@@ -1,4 +1,4 @@
-using MushyAndCoffe.Systems.EventSystem;
+using EventSystem;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
